@@ -1,6 +1,6 @@
 {
   "name": "ai-city-select",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Ai Select City Componet",
   "main": "dist/main.js",
   "keywords": [
@@ -56,7 +56,7 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://gitlab.asiainfo.com/kara-apps/ai-city-select"
   },
   "author": "maxc3",
   "license": "MIT",

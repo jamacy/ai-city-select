@@ -8,16 +8,15 @@
 
 安装
 ```
-npm i react-city-select 或 yarn add react-city-select
+npm i ai-city-select -registry=http://npm-mirror.asiainfo.com/
 ```
 
 ```javascript
 ...
 // 引入 CitySelect 组件
-import CitySelect from 'react-city-select';
+import CitySelect from 'ai-city-select';
 
-// 引入数据
-import data from './data.json';
+
 
 // 引入图标路径
 import iconSrc from './location_icon@2x.png';
@@ -26,8 +25,6 @@ export default class APP extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // 结构化城市列表数据
-      citysData: data.indexCitys, 
       // 对某项数据定制化配置
       config: {
         pos: {
