@@ -1,6 +1,6 @@
 {
   "name": "ai-city-select",
-  "version": "0.0.2",
+  "version": "0.0.6",
   "description": "Ai Select City Componet",
   "main": "dist/main.js",
   "keywords": [
@@ -23,6 +23,7 @@
     "babel-preset-env": "^1.5.2",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
+    "light-toast": "^0.1.8",
     "chalk": "^1.1.3",
     "cross-env": "^5.0.1",
     "css-loader": "^0.28.4",
@@ -57,7 +58,7 @@
     "type": "git",
     "url": ""
   },
-  "author": "BrightChen",
+  "author": "maxc3",
   "license": "MIT",
   "dependencies": {
     "prop-types": "^15.6.2"

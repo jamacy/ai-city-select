@@ -9,23 +9,39 @@ function log(info) {
   console.log(`%c react-city-select %c ${info} %c`, "background:#35495e ; padding: 1px; border-radius: 3px 0 0 3px;  color: #fff", "background:#41b883 ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff", "background:transparent");
 }
 
-
+//判断城市数据里面有没有数据
 function isCityNull(value){
   const { indexCitys } = data
-  const str = value.replace('市','')
-  let ret = false
-  Object.keys(indexCitys).map((sec, secIndex) =>{
-    indexCitys[sec].map((item)=>item.name.includes(str) ? ret = true : false)
-  })
+  const cityName = value.replace("市","");
+  let flag = false
+  let keys = Object.keys(indexCitys)
+  let ret = null
+  for(let i = 0 ;i< keys.length ;i++){
+    let sec = keys[i]
+    if(flag){
+      break;
+    }
+    for( let i=0;i < indexCitys[sec].length; i++ ){
+      let item = indexCitys[sec][i]
+      if(item.name.includes(cityName)){
+        ret = {
+          id:item.id,
+          name:item.name
+        } 
+        flag = true
+      }
+    }
+  }
   return ret
 }
+
 export default class CitySelect extends React.Component {
-  
+
   constructor(props) {
     super(props);
 
     const dataKeys = Object.keys(this.props.data).map(secKey => secKey);
-   
+  
     // 根据数据项 键值 或 label属性 提取标识
     const noniusKeys = Object.keys(this.props.data).map((secKey, secIndex) => secKey);
     
@@ -130,10 +146,6 @@ export default class CitySelect extends React.Component {
   configAttr(key, attr) {
     let res = null;
     if (this.props.config) {
-      if(this.props.config[key]){
-        console.log("this.props",this.props.config[key][attr])
-      }
-
       return this.props.config[key] && this.props.config[key][attr] ? this.props.config[key][attr] : null;
     }
     return res;
@@ -150,13 +162,17 @@ export default class CitySelect extends React.Component {
 
   renderCities(sec){
     const { location } = this.props.config
-    console.log("location",this.props.config)
     const { data } = this.props
+    const city = isCityNull(location.value)
     if(sec === "pos"){
-      return <div className={styles.current}><img src={iconSrc} alt="" />
+      return <div className={styles.current}   onClick={ city ? this.props.onSelectItem.bind(this, city) : this.props.onSelectItem.bind(this, {
+        name:location.value,
+        id:'999999'
+      })}>
+        <img src={iconSrc} alt="" />
       {
        location.value ? 
-        (isCityNull(location.value) ? <span>{location.value}</span> : '获取城市失败') : '定位中...'
+        (city ? <span>{city.name}</span> : <span>{location.value}</span>) : <span>定位中...</span>
       }
       </div>
     }else{

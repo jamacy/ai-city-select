@@ -1,9 +1,9 @@
 .clSearchComponent {
   $vm: 100vw/375;
-  padding-bottom: 50 * $vm;
+  padding-bottom: 20 * $vm;
   .box div {
     color: #000;
-    font-size: 15 * $vm;
+    font-size: 14 * $vm;
   }
   .section>.title {
     padding: 0 10 * $vm;
@@ -18,8 +18,8 @@
     justify-content: center;
     align-items: center;
     img{
-      height: 20 * $vm;
-      width: 15 * $vm;
+      height: 18 * $vm;
+      width: 13 * $vm;
     }
     span{
       display:block;
@@ -31,23 +31,35 @@
     padding: 0 10 * $vm;
   }
   .section>.grid {
-    padding: 10 * $vm 10 * $vm 0;
+    padding: 5 * $vm  25 * $vm 0 10 * $vm;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
     justify-content: flex-start;
   }
+  .grid{
+    background-color: #f0f0f0;
+  }
   .grid>div {
-    width: 80 * $vm;
+    width: 30%;
     text-align: center;
     margin-bottom: 10 * $vm;
+    margin-right: 10 * $vm;
+    padding:3 * $vm 0;
+    background-color: #fff;
+    &:nth-last-child(1){
+      margin-right:0;
+    }
     // word-wrap:;
   }
   .line>div {
     height: 40 * $vm;
     line-height: 40 * $vm;
-    border-top: 1 * $vm solid #f0f0f0;
+    border-bottom: 1 * $vm solid #f0f0f0;
+    &:nth-last-child(1){
+      border-bottom:none;
+    }
   }
   .nonius {
     width: 40 * $vm;
@@ -66,7 +78,7 @@
     width: 100%;
     text-align: center;
     display: block;
-    height: 20 * $vm;
+    height: 18 * $vm;
   }
   .icon-local {
     width: 11 * $vm;
