@@ -164,6 +164,7 @@ export default class CitySelect extends React.Component {
     const { location } = this.props.config
     const { data } = this.props
     const city = isCityNull(location.value)
+    console.log("sec",sec)
     if(sec === "pos"){
       return <div className={styles.current}   onClick={ city ? this.props.onSelectItem.bind(this, city) : this.props.onSelectItem.bind(this, {
         name:location.value,
@@ -176,9 +177,11 @@ export default class CitySelect extends React.Component {
       }
       </div>
     }else{
-      return data[sec].map((item, itemIndex) => <div
-      onClick={this.props.onSelectItem.bind(this, item)}
-      key={itemIndex}>{item.name}</div>)
+      if(data[sec]){
+        return data[sec].map((item, itemIndex) => <div
+        onClick={this.props.onSelectItem.bind(this, item)}
+        key={itemIndex}>{item.name}</div>)
+      }
     }
   }
   render() {

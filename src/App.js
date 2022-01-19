@@ -72,8 +72,6 @@ export default class APP extends React.Component {
       //     console.log(err)
       //   } 
       // })
-
-
   }
   
 
