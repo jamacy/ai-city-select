@@ -2,8 +2,22 @@ import React from "react";
 // 引入 CitySelect 组件
 import CitySelect from '../lib/index';
 import Toast from "light-toast";
-import iconLocation from '../lib/icon.png';
 
+
+const recentVisitCities = [
+  {
+    "id": "110000",
+    "name": "北京市"
+  },
+  {
+    "id": "310000",
+    "name": "上海市"
+  },
+  {
+    "id": "610100",
+    "name": "西安市"
+  }
+]
 
 export default class APP extends React.Component {
 
@@ -13,16 +27,16 @@ export default class APP extends React.Component {
        config: {
         pos: {
           icon: "", // 游标图标
-          title: '当前',
-          key: '当前',
+          title: '顶部',
+          key: '顶部',
         },
         location: {
           value:'成都市'
         },
         hot: {
-          title: '热门城市',
+          title: '国内热门城市',
           key: '热门',
-          style: 'grid', 
+          style: 'grid',
         }
        }
     }
@@ -37,7 +51,6 @@ export default class APP extends React.Component {
         const conf = Object.assign({},_self.state.config)
           if (this.getStatus() === BMAP_STATUS_SUCCESS) {
             geoc.getLocation(r.point,  (rs)=> {
-              console.log("rs",rs)
               const { city }  = rs.addressComponents
               conf.location.value = city
               _self.setState({
@@ -55,7 +68,7 @@ export default class APP extends React.Component {
         { enableHighAccuracy: true }
       );
       // window.kara && window.kara.getCoordinate({
-      //   appId: "2kjjtPu18vQtYGnk", 
+      //   appId: "2kjjtPu18vQtYGnk",
       //   coordinateType: 1,
       //   success: (result)=> {
 
@@ -70,10 +83,10 @@ export default class APP extends React.Component {
 
       //   },fail:(err)=>{
       //     console.log(err)
-      //   } 
+      //   }
       // })
   }
-  
+
 
 
   // 选中城市回调
@@ -86,6 +99,7 @@ export default class APP extends React.Component {
       // 注册组件
       <CitySelect
         config={this.state.config}
+        recentVisit = {recentVisitCities}
         onSelectItem={this.handleSelectCity.bind(this)}>
       </CitySelect>
     )

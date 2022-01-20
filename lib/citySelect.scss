@@ -1,34 +1,123 @@
-.clSearchComponent {
-  $vm: 100vw/375;
-  padding-bottom: 20 * $vm;
-  .box div {
-    color: #000;
-    font-size: 14 * $vm;
+
+$brown: #333;
+$brown-bg: #fff;
+$vm: 100vw/375;
+
+
+.search{
+  display: block;
+  width:100%;
+  position:fixed;
+  top:0;
+  left:0;
+ 
+  z-index:1000;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 -8px 18px 0 #c2c2c2;
+  background-color:#fff;
+  
+  .section{
+    border-bottom: 1 * $vm solid #f1f1f1;
+    border-top: solid 5 * $vm #F3F3F3;
   }
-  .section>.title {
-    padding: 0 10 * $vm;
-    height: 25 * $vm;
-    line-height: 25 * $vm;
-    background: #f0f0f0;
-    font-size: 12 * $vm;
-    color: #999999;
+  
+  .input{
+    display: flex;
+    margin:15 * $vm 10 * $vm;
+    height:32 * $vm;
+    
+    border: 1 * $vm solid #c2c2c2;
+    border-radius: 5 * $vm;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    input{
+      flex:1;
+      box-sizing:content-box;
+      display: block;
+      padding:5 * $vm;
+      height:20 * $vm;
+      font-size: 14 * $vm;
+      border:none;
+      outline:0px;
+      flex: 1;
+    }
+    i{
+      display: block;
+      background: url(./search_icon.png) no-repeat;
+      background-size: contain;
+      width:16* $vm;
+      height:16* $vm;
+      margin-left:5* $vm;
+      margin-right:3* $vm;
+    }
+    em{
+      display: block;
+      background: url(./remove.png) no-repeat;
+      background-size: contain;
+      width:16* $vm;
+      height:16* $vm;
+      margin-left:5* $vm;
+      margin-right:3* $vm;
+    }
   }
-  .current{
+  .search-result{
+    flex:1;
+    width:100%;
+    display: none;
+    background-color:#fff;
+    ul{
+      padding:0;
+      margin:0;
+      li{
+        padding:8 * $vm 0;
+        list-style: none;
+        margin-left:10 * $vm;
+        border-bottom: 1 * $vm solid #f1f1f1;
+        font-size: 14 * $vm;
+        color:#333;
+      }
+    }
+    
+  }
+  &.active {
+    height: 100%;
+    .search-result{
+      display: block;
+    }
+  }
+
+  .no-data{
+    height:100px;
     display: flex;
     justify-content: center;
     align-items: center;
-    img{
-      height: 18 * $vm;
-      width: 13 * $vm;
-    }
-    span{
-      display:block;
-      flex: 1;
-      margin-left:5 * $vm
-    }
+    color:#999;
+    font-size: 14 * $vm;
   }
+}
+.placeholder {
+    
+  height:70 * $vm;
+}
+
+.currentCities{
+
   .section>.box {
     padding: 0 10 * $vm;
+    background: #fff;
+
+  }
+  .section> .ititle{
+
+
+    font-size: 14 * $vm;
+    color: #999999;
+    font-weight: 400;
+    padding:10 * $vm;
+    margin:0;
   }
   .section>.grid {
     padding: 5 * $vm  25 * $vm 0 10 * $vm;
@@ -42,12 +131,99 @@
     background-color: #f0f0f0;
   }
   .grid>div {
-    width: 30%;
+    width: 29.5%;
     text-align: center;
     margin-bottom: 10 * $vm;
-    margin-right: 10 * $vm;
-    padding:3 * $vm 0;
+    margin-right: 9 * $vm;
+    padding:6 * $vm 0;
     background-color: #fff;
+    color: $brown;
+    background: $brown-bg;
+    border-radius: 10px;
+    border: 1 * $vm solid #f0f0f0;
+
+    &:nth-last-child(1){
+      margin-right:0;
+    }
+    // word-wrap:;
+  }
+}
+.clSearchComponent {
+
+  padding-bottom: 20 * $vm;
+
+  flex-direction: column;
+  
+  .box div {
+    color: #333333;
+    font-size: 14 * $vm;
+  }
+  .section>.title {
+    padding: 5* $vm 10 * $vm;
+    height: 25 * $vm;
+    line-height: 25 * $vm;
+    background: #f0f0f0;
+    font-size: 14 * $vm;
+    color: #999999;
+    border-bottom: 1 * $vm solid #f0f0f0;
+    background: #fff;
+    &.hot{
+      border-bottom: none;
+    }
+  }
+  .current{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img{
+      height: 19.2 * $vm;
+      width: 13.2 * $vm;
+    }
+    span{
+      display:block;
+      flex: 1;
+      margin-left:5 * $vm
+    }
+  }
+
+
+  .section>.box {
+    padding: 0 10 * $vm;
+    background: #fff;
+
+  }
+  .section> .ititle{
+
+
+    font-size: 14 * $vm;
+    color: #999999;
+    font-weight: 400;
+    padding:10 * $vm;
+    margin:0;
+  }
+  .section>.grid {
+    padding: 5 * $vm  25 * $vm 0 10 * $vm;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .grid{
+    background-color: #f0f0f0;
+  }
+  .grid>div {
+    width: 29.5%;
+    text-align: center;
+    margin-bottom: 10 * $vm;
+    margin-right: 9 * $vm;
+    padding:6 * $vm 0;
+    background-color: #fff;
+    color: $brown;
+    background: $brown-bg;
+    border-radius: 10px;
+    border: 1 * $vm solid #f0f0f0;
+
     &:nth-last-child(1){
       margin-right:0;
     }
