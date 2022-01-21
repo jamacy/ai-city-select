@@ -223,35 +223,38 @@ export default class CitySelect extends React.Component {
     return res;
   }
 
-  renderCities(sec) {
+  renderCities(sec,recentVisit) {
     const { location } = this.props.config;
     const { data } = this.props;
     const city = isCityNull(location.value);
-
     if (sec === "pos") {
       return (
-        <div
-          className={styles.current}
-          onClick={
-            city
-              ? this.props.onSelectItem.bind(this, city)
-              : this.props.onSelectItem.bind(this, {
-                  name: location.value,
-                  id: "999999",
-                })
-          }
-        >
-          <img src={iconSrc} alt="" />
-          {location.value ? (
-            city ? (
-              <span>当前定位城市 {city.name}</span>
+       
+        <React.Fragment>
+          <div
+            className={styles.current}
+            onClick={
+              city
+                ? this.props.onSelectItem.bind(this, city)
+                : this.props.onSelectItem.bind(this, {
+                    name: location.value,
+                    id: "999999",
+                  })
+            }
+          >
+            <img src={iconSrc} alt="" />
+            {location.value ? (
+              city ? (
+                <span>当前定位城市 {city.name}</span>
+              ) : (
+                <span>当前定位城市 {location.value}</span>
+              )
             ) : (
-              <span>当前定位城市 {location.value}</span>
-            )
-          ) : (
-            <span>定位中...</span>
-          )}
-        </div>
+              <span>定位中...</span>
+            )}
+          </div>
+         
+        </React.Fragment>
       );
     } else {
       if (data[sec]) {
@@ -405,13 +408,10 @@ export default class CitySelect extends React.Component {
             )}
           </div>
         </div>
-
-
-
-
+        
         <div className={styles.placeholder}></div>
-        {
-          this.renderCecentCities(recentVisit)
+       {
+           this.renderCecentCities(recentVisit)
         }
         <div className={styles.clSearchComponent}>
           {/* 检索游标 */}
@@ -461,7 +461,7 @@ export default class CitySelect extends React.Component {
                     (styles[this.configAttr(sec, "style")] || styles["line"])
                   }
                 >
-                  {this.renderCities(sec)}
+                  {this.renderCities(sec,recentVisit)}
                 </div>
               </div>
             ))}
