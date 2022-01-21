@@ -3,7 +3,6 @@ $brown: #333;
 $brown-bg: #fff;
 $vm: 100vw/375;
 
-
 .search{
   display: block;
   width:100%;
@@ -141,7 +140,7 @@ $vm: 100vw/375;
     background: $brown-bg;
     border-radius: 10px;
     border: 1 * $vm solid #f0f0f0;
-
+    font-size: 13 * $vm;
     &:nth-last-child(1){
       margin-right:0;
     }
@@ -223,7 +222,7 @@ $vm: 100vw/375;
     background: $brown-bg;
     border-radius: 10px;
     border: 1 * $vm solid #f0f0f0;
-
+    font-size: 13 * $vm;
     &:nth-last-child(1){
       margin-right:0;
     }

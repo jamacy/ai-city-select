@@ -92,6 +92,7 @@ export default class CitySelect extends React.Component {
       noniusKeys: noniusKeys,
       searchStatus: "unplayed",
       filteredCities: null,
+      searchText:''
     };
 
     // 当前滑动字母位置
@@ -133,6 +134,13 @@ export default class CitySelect extends React.Component {
     }
   }
 
+  componentDidUpdate(){
+    if(this.state.searchStatus === 'completed'){
+      document.querySelector('body').style.overflow = 'hidden'
+    }else{
+      document.querySelector('body').style.overflow = 'auto'
+    }
+  }
   // 游标位置合法检测
   onScrollIndexCheck() {
     this.onScrollIndex = parseInt(
@@ -277,6 +285,7 @@ export default class CitySelect extends React.Component {
     this.setState({
       searchStatus: "completed",
       filteredCities: retArr,
+      searchText:value
     });
     // for (const child of data.indexCitys[finalKeys]){
     //   console.log("item",child)
@@ -319,6 +328,7 @@ export default class CitySelect extends React.Component {
     this.gref.current.value = "";
     this.setState({
       filteredCities: [],
+      searchText:'',
       searchStatus: "unplayed",
     });
 
@@ -342,8 +352,8 @@ export default class CitySelect extends React.Component {
 
   render() {
     if (!this.props.data) return false;
-    const { filteredCities, searchStatus } = this.state;
-    const { recentVisit } = this.props
+    const { filteredCities, searchStatus ,searchText } = this.state;
+    const { recentVisit  } = this.props
 
     return (
       <React.Fragment>
@@ -364,7 +374,10 @@ export default class CitySelect extends React.Component {
                 onChange={debounce(this.changeHandler, 400)}
                 placeholder="输入城市名查询"
               />
-              <em onClick={this.handleClear}></em>
+              {
+                searchText  && <em onClick={this.handleClear}></em>
+              }
+              
             </div>
           </div>
           <div className={styles["search-result"]}>
@@ -392,6 +405,7 @@ export default class CitySelect extends React.Component {
             )}
           </div>
         </div>
+
 
 
 
@@ -453,6 +467,7 @@ export default class CitySelect extends React.Component {
             ))}
           </div>
         </div>
+         
       </React.Fragment>
     );
   }
