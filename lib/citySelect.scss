@@ -183,6 +183,17 @@ $vm: 100vw/375;
       flex: 1;
       margin-left:5 * $vm
     }
+    .reload{
+      img{
+        display: inline-block;
+        width:12 * $vm;
+        height:12 * $vm;
+        margin-left:5* $vm;
+        margin-right:5* $vm;
+        line-height:5 * $vm;
+        vertical-align: middle;
+      }
+    }
   }
 
 

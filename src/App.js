@@ -41,32 +41,11 @@ export default class APP extends React.Component {
        }
     }
   }
+
+
   componentDidMount(){
 
-      let geoc = new BMap.Geocoder();
-      let geolocation = new BMap.Geolocation();
-      let _self = this
-      let defaultCity = '北京市'
-      geolocation.getCurrentPosition(function(r){
-        const conf = Object.assign({},_self.state.config)
-          if (this.getStatus() === BMAP_STATUS_SUCCESS) {
-            geoc.getLocation(r.point,  (rs)=> {
-              const { city }  = rs.addressComponents
-              conf.location.value = city
-              _self.setState({
-                config:conf
-              });
-            });
-          } else {
-            Toast.info("定位失败:" + this.getStatus());
-            conf.location.value = defaultCity
-            _self.setState({
-              config:conf
-            });
-          }
-        },
-        { enableHighAccuracy: true }
-      );
+    this.getLocation()
       // window.kara && window.kara.getCoordinate({
       //   appId: "2kjjtPu18vQtYGnk",
       //   coordinateType: 1,
@@ -87,17 +66,49 @@ export default class APP extends React.Component {
       // })
   }
 
-
-
+  getLocation(){
+    console.log("getLocation")
+    let geoc = new BMap.Geocoder();
+    let geolocation = new BMap.Geolocation();
+    let _self = this
+    let defaultCity = '北京市'
+    geolocation.getCurrentPosition(function(r){
+      const conf = Object.assign({},_self.state.config)
+        if (this.getStatus() === BMAP_STATUS_SUCCESS) {
+          geoc.getLocation(r.point,  (rs)=> {
+            const { city }  = rs.addressComponents
+            conf.location.value = city
+            _self.setState({
+              config:conf
+            });
+          });
+        } else {
+          Toast.info("定位失败:" + this.getStatus());
+          conf.location.value = defaultCity
+          _self.setState({
+            config:conf
+          });
+        }
+      },
+      { enableHighAccuracy: true }
+    );
+  }
+  
   // 选中城市回调
   handleSelectCity(cityData) {
     console.log('选中数据项:', cityData);
+  }
+
+  //刷新
+  handleRefresh(){
+    this.getLocation()
   }
 
   render() {
     return (
       // 注册组件
       <CitySelect
+        refreshAction = {this.handleRefresh.bind(this)}
         config={this.state.config}
         recentVisit = {recentVisitCities}
         onSelectItem={this.handleSelectCity.bind(this)}>

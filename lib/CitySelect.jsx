@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 
 import data from "./data.json";
 import iconSrc from "./location.png";
+import reloadIcon from "./reload.png";
 import styles from "./citySelect.scss";
 
 const debounce = (fn, time) => {
@@ -64,13 +65,14 @@ export default class CitySelect extends React.Component {
     this.searchRef = React.createRef();
     this.changeHandler = this.changeHandler.bind(this);
     this.handleClear = this.handleClear.bind(this);
-    const dataKeys = Object.keys(this.props.data).map((secKey) => secKey);
-    dataKeys.splice(1,1)
+    // let newData = this.props.data.slice(0)
+    const fromData = Object.fromEntries(Object.entries(this.props.data).filter(([key]) => !key.includes('hot')));
+    const dataKeys = Object.keys(fromData).map((secKey) => secKey);
     // 根据数据项 键值 或 label属性 提取标识
-    const noniusKeys = Object.keys(this.props.data).map(
+    const noniusKeys = Object.keys(fromData).map(
       (secKey, secIndex) => secKey
     );
-
+      console.log("xx",noniusKeys)
     if (this.props.config) {
       for (const key in this.props.config) {
         if (this.props.config.hasOwnProperty(key)) {
@@ -116,7 +118,7 @@ export default class CitySelect extends React.Component {
       this.listTitleDom = document.querySelectorAll(
         `.${styles.section} > .${styles["title"]}`
       );
-
+       
       this.noniusEleTop = noniusEle.getClientRects()[0].top;
       //console.log("this.noniusEleTop ",this.noniusEleTop )
       this.noniusEleHeight = noniusEleChild.clientHeight;
@@ -147,7 +149,7 @@ export default class CitySelect extends React.Component {
       (this.scrollEleTop - this.noniusEleTop) / this.noniusEleHeight,
       10
     );
-
+  
 
     if (this.onScrollIndex < 0) {
       this.onScrollIndex = 0;
@@ -242,15 +244,14 @@ export default class CitySelect extends React.Component {
                   })
             }
           >
-            <img src={iconSrc} alt="" />
-            {location.value ? (
+            { location.value ? (
               city ? (
-                <span>当前定位城市 {city.name}</span>
+                <React.Fragment><img src={iconSrc} alt="" /><span>当前定位城市 {city.name}</span></React.Fragment>
               ) : (
-                <span>当前定位城市 {location.value}</span>
+                <React.Fragment><img src={iconSrc} alt="" /> <span>当前定位城市 {location.value}</span></React.Fragment>
               )
             ) : (
-              <span>定位中...</span>
+              <span className={styles.reload} onClick={this.props.refreshAction}><img src={reloadIcon}/>定位失败，点击重试</span>  
             )}
           </div>
          

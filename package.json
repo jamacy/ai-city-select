@@ -1,6 +1,6 @@
 {
   "name": "ai-city-select",
-  "version": "0.1.6",
+  "version": "0.1.8",
   "description": "Ai Select City Componet",
   "main": "dist/main.js",
   "keywords": [
