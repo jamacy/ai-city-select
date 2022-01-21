@@ -70,7 +70,7 @@ export default class CitySelect extends React.Component {
     const noniusKeys = Object.keys(this.props.data).map(
       (secKey, secIndex) => secKey
     );
-   
+
     if (this.props.config) {
       for (const key in this.props.config) {
         if (this.props.config.hasOwnProperty(key)) {
@@ -119,7 +119,7 @@ export default class CitySelect extends React.Component {
       this.noniusEleTop = noniusEle.getClientRects()[0].top;
       //console.log("this.noniusEleTop ",this.noniusEleTop )
       this.noniusEleHeight = noniusEleChild.clientHeight;
-      
+
       // 单独声明 touchmove 事件，解决页面滚动问题
       document.querySelector(`.${styles.nonius}`).addEventListener(
         "touchmove",
@@ -139,7 +139,7 @@ export default class CitySelect extends React.Component {
       (this.scrollEleTop - this.noniusEleTop) / this.noniusEleHeight,
       10
     );
-   
+
 
     if (this.onScrollIndex < 0) {
       this.onScrollIndex = 0;
@@ -176,7 +176,7 @@ export default class CitySelect extends React.Component {
     this.setState({
       isShowSelectText: false,
     });
- 
+
     this.onScrollIndexCheck();
     const target = this.listTitleDom[this.onScrollIndex];
     let searchBox = this.searchRef.current
@@ -335,11 +335,11 @@ export default class CitySelect extends React.Component {
                 cities.map((item,index)=><div onClick={()=>this.props.onSelectItem(item)} key={index}>{item.name}</div>)
               }
             </div>
-          </div> 
+          </div>
 
           </div>
   }
-  
+
   render() {
     if (!this.props.data) return false;
     const { filteredCities, searchStatus } = this.state;
@@ -394,7 +394,7 @@ export default class CitySelect extends React.Component {
         </div>
 
 
-              
+
         <div className={styles.placeholder}></div>
         {
           this.renderCecentCities(recentVisit)
@@ -424,7 +424,7 @@ export default class CitySelect extends React.Component {
 
 
         {/* 最近访问的城市 */}
-        
+
           {/* 数据列表 */}
           <div>
             {Object.keys(this.props.data).map((sec, secIndex) => (

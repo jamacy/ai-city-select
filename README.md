@@ -38,6 +38,21 @@ export default class APP extends React.Component {
         }
       }
     };
+
+    this.recentVisitCities = [
+      {
+        "id": "110000",
+        "name": "北京市"
+      },
+      {
+        "id": "310000",
+        "name": "上海市"
+      },
+      {
+        "id": "610100",
+        "name": "西安市"
+      }
+    ]
   }
 
   // 选中城市回调
@@ -52,6 +67,7 @@ export default class APP extends React.Component {
         data={this.state.citysData}
         // 传入配置
         config={this.state.config}
+        recentVisit = {this.recentVisitCities}
         // 传入回调
         onSelectItem={this.handleSelectCity.bind(this)}>
       </CitySelect>
@@ -59,14 +75,14 @@ export default class APP extends React.Component {
   }
 }
 ```
-### props 参数 
+### props 参数
 
 属性 | 值 | 说明
 ---|---|---
 data | 必填；对象；| 城市组件数据JSON对象
 config | 可选；对象；| 配置或覆盖某个 key 下的值，详情见下表
 onSelectItem | 必填；函数；| 点击单元格数据回调
-
+recentVisit | 可选; 对象 | 最近访问过的城市列表
 ### config 参数
 
 
@@ -84,7 +100,7 @@ sec-key : 对象key
 ### data 数据格式
 
 ```JSON
-   
+
 // 定位数据项
 "pos": [{
   "id": "110100",
